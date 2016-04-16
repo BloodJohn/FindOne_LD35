@@ -43,7 +43,7 @@ public class CardController : MonoBehaviour
         UpdateStats();
     }
 
-    public void UpdateStats()
+    private void UpdateStats()
     {
         Debug.Assert(sprite != null, "Sprite in null!");
         if (sprite == null) return;
@@ -70,7 +70,7 @@ public class CardController : MonoBehaviour
     public void SetColor()
     {
         const int maxColor = 9;
-        int rndColor = Random.Range(0, maxColor);
+        var rndColor = Random.Range(0, maxColor);
 
         color = Color.white;
 

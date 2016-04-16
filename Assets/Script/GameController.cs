@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
@@ -14,10 +15,11 @@ public class GameController : MonoBehaviour
 
     private bool gameOver = false;
     private int count = 0;
-    
+
     public int countFail = 0;
     private int countWhite = 0;
     private int level = 1;
+    private bool restartingLevel = false;
 
     public static GameController instance;
     private List<CardController> cardList = new List<CardController>(10);
@@ -30,26 +32,28 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        CardController[] allCard = FindObjectsOfType(typeof(CardController)) as CardController[];
-        foreach (CardController card in allCard)
+        var allCard = FindObjectsOfType(typeof(CardController)) as CardController[];
+        foreach (var card in allCard)
             cardList.Add(card);
 
-        RestartLevel(true);
+        StartCoroutine(RestartLevel(true));
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (restartingLevel) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             if (gameOver)
             {
-                RestartLevel(true);
+                StartCoroutine(RestartLevel(true));
                 return;
             }
 
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Collider2D hitCollider = Physics2D.OverlapPoint(mousePosition);
+            var hitCollider = Physics2D.OverlapPoint(mousePosition);
             if (hitCollider != null)
             {
                 CardController clickCard = null;
@@ -74,7 +78,8 @@ public class GameController : MonoBehaviour
 
                     if (count >= countWhite)
                     {
-                        RestartLevel(false);
+                        StartCoroutine(RestartLevel(false));
+                        return;
                     }
                 }
                 else
@@ -97,20 +102,33 @@ public class GameController : MonoBehaviour
         objectiveText.text = "Game Over!";
         countText.text = string.Format("Total {0}", count);
 
-        foreach (var card in cardList)
-            card.SetColor();
+        foreach (var card in cardList) card.SetColor();
 
         gameOver = true;
     }
 
-    private void RestartLevel(bool firstLevel)
+    private IEnumerator RestartLevel(bool firstLevel)
     {
+        restartingLevel = true;
+        yield return new WaitForSeconds(0.5f);
+
         gameOver = false;
         objectiveText.text = "Tap only edible\nmushrooms";
         count = 0;
-        level = firstLevel ? 1 : (level + 1);
         levelText.text = string.Format("Level {0}", level);
         countWhite = 0;
+
+        if (firstLevel)
+        {
+            level = 1;
+            countFail = 0;
+            countText.text = "Let's go!";
+        }
+        else
+        {
+            level++;
+            countText.text = "Next Level!";
+        }
 
         foreach (var card in cardList)
         {
@@ -119,16 +137,7 @@ public class GameController : MonoBehaviour
             if (card.IsGood) countWhite++;
         }
 
-
-        if (firstLevel)
-        {
-            countFail = 0;
-            countText.text = "Let's go!";
-        }
-        else
-        {
-            countText.text = "Next Level!";
-        }
+        restartingLevel = false;
     }
 
     public int MushroomMax
