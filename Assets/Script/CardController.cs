@@ -4,18 +4,22 @@ public class CardController : MonoBehaviour
 {
     public BoxCollider2D collider;
     public GameObject sprite;
-    public bool upOrientation;
+    /// <summary>Уже сыгравшая карта (вбрана)</summary>
+    public bool isGood;
+    /// <summary>Уже сыгравшая карта (вбрана)</summary>
+    public bool isSelected;
     private Color color;
 
     void Awake()
     {
         collider = GetComponent<BoxCollider2D>();
+        isSelected = false;
     }
 
     // Use this for initialization
     void Start()
     {
-        UpdateStats();
+        Restart();
     }
 
     // Update is called once per frame
@@ -25,11 +29,16 @@ public class CardController : MonoBehaviour
 
     public void OnClick()
     {
-        Debug.Log("Cick!");
-
-        upOrientation = !upOrientation;
+        isSelected = true;
         UpdateStats();
         SetColor(8);
+    }
+
+    public void Restart()
+    {
+        SetColor(2);
+        isGood = (color == Color.white);
+        UpdateStats();
     }
 
     public void UpdateStats()
@@ -37,12 +46,12 @@ public class CardController : MonoBehaviour
         Debug.Assert(sprite!=null, "Sprite in null!");
         if (sprite == null) return;
 
-        sprite.transform.localEulerAngles =  new Vector3(0f, 0f, upOrientation ? 0f : 180f);
+        sprite.transform.localEulerAngles =  new Vector3(0f, 0f, isSelected ? 180f : 0f);
     }
 
-    public void SetColor(int maxColor)
+    private void SetColor(int maxColor)
     {
-        int rndColor = Random.Range(0, maxColor < 8 ? maxColor : 8);
+        int rndColor = Random.Range(0, maxColor < 9 ? maxColor : 9);
 
         color = Color.white;
 
