@@ -10,10 +10,12 @@ public class GameController : MonoBehaviour
 
     public Sprite[] snailList;
     public Sprite[] mushroomList;
-
+    public AudioClip[] soundList;
 
     private bool gameOver = false;
     private int count = 0;
+    
+    public int countFail = 0;
     private int countWhite = 0;
     private int level = 1;
 
@@ -68,6 +70,7 @@ public class GameController : MonoBehaviour
                 {
                     count++;
                     countText.text = count.ToString();
+                    clickCard.sound.PlayOneShot(soundList[0]);
 
                     if (count >= countWhite)
                     {
@@ -76,7 +79,14 @@ public class GameController : MonoBehaviour
                 }
                 else
                 {
-                    GameOver();
+                    countFail++;
+                    clickCard.sound.PlayOneShot(soundList[1]);
+
+                    if (countFail > 1)
+                    {
+                        clickCard.DrawDeath();
+                        GameOver();
+                    }
                 }
             }
         }
@@ -111,8 +121,23 @@ public class GameController : MonoBehaviour
 
 
         if (firstLevel)
+        {
+            countFail = 0;
             countText.text = "Let's go!";
+        }
         else
+        {
             countText.text = "Next Level!";
+        }
+    }
+
+    public int MushroomMax
+    {
+        get
+        {
+            if (level < 5) return 2;
+            if (level < 10) return 3;
+            return mushroomList.Length;
+        }
     }
 }

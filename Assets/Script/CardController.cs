@@ -1,21 +1,22 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CardController : MonoBehaviour
 {
     public BoxCollider2D collider;
     public GameObject sprite;
+    public AudioSource sound;
     /// <summary>Тип гриба (0,1 - хорошие, 2,3 - плохие)</summary>
     private int typeImage;
     /// <summary>Уже сыгравшая карта (вбрана)</summary>
     public bool isSelected;
     private Color color;
 
-    public bool IsGood { get { return typeImage < 2; } }
+    public bool IsGood { get { return 0 == typeImage % 2; } }
 
     void Awake()
     {
         collider = GetComponent<BoxCollider2D>();
+        sound = GetComponent<AudioSource>();
         isSelected = false;
     }
 
@@ -38,13 +39,13 @@ public class CardController : MonoBehaviour
 
     public void Restart()
     {
-        typeImage = Random.Range(0, GameController.instance.mushroomList.Length);
+        typeImage = Random.Range(0, GameController.instance.MushroomMax);
         UpdateStats();
     }
 
     public void UpdateStats()
     {
-        Debug.Assert(sprite!=null, "Sprite in null!");
+        Debug.Assert(sprite != null, "Sprite in null!");
         if (sprite == null) return;
 
         //sprite.transform.localEulerAngles =  new Vector3(0f, 0f, isSelected ? 180f : 0f);
@@ -85,13 +86,22 @@ public class CardController : MonoBehaviour
             case 8: color = Color.gray; break;
             default: color = Color.white; break;
         }
-        
+
         sprite.GetComponent<SpriteRenderer>().material.color = color;
+    }
+
+    internal void DrawDeath()
+    {
+        SetSprite(GameController.instance.snailList[2]);
     }
 
     private void SetSprite(Sprite newImage)
     {
         sprite.GetComponent<SpriteRenderer>().sprite = newImage;
-        sprite.GetComponent<SpriteRenderer>().material.color = Color.white;
+
+        if (GameController.instance.countFail > 0)
+            SetColor();
+        else
+            sprite.GetComponent<SpriteRenderer>().material.color = Color.white;
     }
 }
