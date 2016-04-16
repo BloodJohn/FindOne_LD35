@@ -1,14 +1,17 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 public class CardController : MonoBehaviour
 {
     public BoxCollider2D collider;
     public GameObject sprite;
-    /// <summary>Уже сыгравшая карта (вбрана)</summary>
-    public bool isGood;
+    /// <summary>Тип гриба (0,1 - хорошие, 2,3 - плохие)</summary>
+    private int typeImage;
     /// <summary>Уже сыгравшая карта (вбрана)</summary>
     public bool isSelected;
     private Color color;
+
+    public bool IsGood { get { return typeImage < 2; } }
 
     void Awake()
     {
@@ -31,13 +34,11 @@ public class CardController : MonoBehaviour
     {
         isSelected = true;
         UpdateStats();
-        SetColor(8);
     }
 
     public void Restart()
     {
-        SetColor(2);
-        isGood = (color == Color.white);
+        typeImage = Random.Range(0, GameController.instance.mushroomList.Length);
         UpdateStats();
     }
 
@@ -46,12 +47,29 @@ public class CardController : MonoBehaviour
         Debug.Assert(sprite!=null, "Sprite in null!");
         if (sprite == null) return;
 
-        sprite.transform.localEulerAngles =  new Vector3(0f, 0f, isSelected ? 180f : 0f);
+        //sprite.transform.localEulerAngles =  new Vector3(0f, 0f, isSelected ? 180f : 0f);
+
+        if (isSelected)
+        {
+            if (IsGood)
+            {
+                SetSprite(GameController.instance.snailList[0]);
+            }
+            else
+            {
+                SetSprite(GameController.instance.snailList[1]);
+            }
+        }
+        else
+        {
+            SetSprite(GameController.instance.mushroomList[typeImage]);
+        }
     }
 
-    private void SetColor(int maxColor)
+    public void SetColor()
     {
-        int rndColor = Random.Range(0, maxColor < 9 ? maxColor : 9);
+        const int maxColor = 9;
+        int rndColor = Random.Range(0, maxColor);
 
         color = Color.white;
 
@@ -67,7 +85,13 @@ public class CardController : MonoBehaviour
             case 8: color = Color.gray; break;
             default: color = Color.white; break;
         }
+        
+        sprite.GetComponent<SpriteRenderer>().material.color = color;
+    }
 
-        sprite.GetComponent<Renderer>().material.color = color;
+    private void SetSprite(Sprite newImage)
+    {
+        sprite.GetComponent<SpriteRenderer>().sprite = newImage;
+        sprite.GetComponent<SpriteRenderer>().material.color = Color.white;
     }
 }

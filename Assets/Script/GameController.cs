@@ -8,12 +8,22 @@ public class GameController : MonoBehaviour
     public Text countText;
     public Text levelText;
 
+    public Sprite[] snailList;
+    public Sprite[] mushroomList;
+
+
     private bool gameOver = false;
     private int count = 0;
     private int countWhite = 0;
     private int level = 1;
 
+    public static GameController instance;
     private List<CardController> cardList = new List<CardController>(10);
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     // Use this for initialization
     void Start()
@@ -54,7 +64,7 @@ public class GameController : MonoBehaviour
 
                 clickCard.OnClick();
 
-                if (clickCard.isGood)
+                if (clickCard.IsGood)
                 {
                     count++;
                     countText.text = count.ToString();
@@ -77,6 +87,8 @@ public class GameController : MonoBehaviour
         objectiveText.text = "Game Over!";
         countText.text = string.Format("Total {0}", count);
 
+        foreach (var card in cardList)
+            card.SetColor();
 
         gameOver = true;
     }
@@ -84,7 +96,7 @@ public class GameController : MonoBehaviour
     private void RestartLevel(bool firstLevel)
     {
         gameOver = false;
-        objectiveText.text = "Tap only white boxes";
+        objectiveText.text = "Tap only edible\nmushrooms";
         count = 0;
         level = firstLevel ? 1 : (level + 1);
         levelText.text = string.Format("Level {0}", level);
@@ -94,7 +106,7 @@ public class GameController : MonoBehaviour
         {
             card.isSelected = false;
             card.Restart();
-            if (card.isGood) countWhite++;
+            if (card.IsGood) countWhite++;
         }
 
 
