@@ -12,10 +12,11 @@ public class GameController : MonoBehaviour
     public Sprite[] snailList;
     public Sprite[] mushroomList;
     public AudioClip[] soundList;
+    public string[] levelNameList;
 
     private bool gameOver = false;
     private int count = 0;
-
+    private int countTotal = 0;
     public int countFail = 0;
     private int countWhite = 0;
     private int level = 1;
@@ -36,6 +37,7 @@ public class GameController : MonoBehaviour
         foreach (var card in allCard)
             cardList.Add(card);
 
+        countText.text = "Simen the Snail";
         StartCoroutine(RestartLevel(true));
     }
 
@@ -48,6 +50,7 @@ public class GameController : MonoBehaviour
         {
             if (gameOver)
             {
+                countText.text = "Bon appetit!";
                 StartCoroutine(RestartLevel(true));
                 return;
             }
@@ -73,11 +76,13 @@ public class GameController : MonoBehaviour
                 if (clickCard.IsGood)
                 {
                     count++;
-                    countText.text = count.ToString();
+                    countTotal++;
+                    countText.text = countTotal.ToString();
                     clickCard.sound.PlayOneShot(soundList[0]);
 
                     if (count >= countWhite)
                     {
+                        countText.text = "Delicious!";
                         StartCoroutine(RestartLevel(false));
                         return;
                     }
@@ -100,7 +105,7 @@ public class GameController : MonoBehaviour
     private void GameOver()
     {
         objectiveText.text = "Game Over!";
-        countText.text = string.Format("Total {0}", count);
+        countText.text = string.Format("Total {0}", countTotal);
 
         foreach (var card in cardList) card.SetColor();
 
@@ -115,19 +120,26 @@ public class GameController : MonoBehaviour
         gameOver = false;
         objectiveText.text = "Tap only edible\nmushrooms";
         count = 0;
-        levelText.text = string.Format("Level {0}", level);
         countWhite = 0;
 
         if (firstLevel)
         {
             level = 1;
+            countTotal = 0;
             countFail = 0;
-            countText.text = "Bon appetit!";
         }
         else
         {
             level++;
-            countText.text = "Delicious!";
+        }
+
+        if (level <= levelNameList.Length)
+        {
+            levelText.text = levelNameList[level - 1];
+        }
+        else
+        {
+            levelText.text = string.Format("Level {0}", level);
         }
 
         foreach (var card in cardList)
