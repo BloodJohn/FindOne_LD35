@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     public Sprite[] mushroomList;
     public AudioClip[] soundList;
     public string[] levelNameList;
+    public Color[] colorList;
 
     private bool gameOver = false;
     private int count = 0;
@@ -107,7 +108,7 @@ public class GameController : MonoBehaviour
         objectiveText.text = "Game Over!";
         countText.text = string.Format("Total {0}", countTotal);
 
-        foreach (var card in cardList) card.SetColor();
+        //foreach (var card in cardList) card.SetColor();
 
         gameOver = true;
     }

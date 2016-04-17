@@ -23,12 +23,7 @@ public class CardController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Restart();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        //Restart();
     }
 
     public void OnClick()
@@ -69,22 +64,12 @@ public class CardController : MonoBehaviour
 
     public void SetColor()
     {
-        const int maxColor = 9;
-        var rndColor = Random.Range(0, maxColor);
+        var color = Color.white;
 
-        color = Color.white;
-
-        switch (rndColor)
+        if (GameController.instance.colorList.Length > 0)
         {
-            case 1: color = Color.red; break;
-            case 2: color = Color.green; break;
-            case 3: color = Color.blue; break;
-            case 4: color = Color.yellow; break;
-            case 5: color = Color.cyan; break;
-            case 6: color = Color.magenta; break;
-            case 7: color = Color.grey; break;
-            case 8: color = Color.gray; break;
-            default: color = Color.white; break;
+            var rndIndex = Random.Range(0, GameController.instance.colorList.Length);
+            color = GameController.instance.colorList[rndIndex];
         }
 
         sprite.GetComponent<SpriteRenderer>().material.color = color;
