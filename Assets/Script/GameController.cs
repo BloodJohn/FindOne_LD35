@@ -122,12 +122,12 @@ public class GameController : MonoBehaviour
         {
             level = 1;
             countFail = 0;
-            countText.text = "Let's go!";
+            countText.text = "Bon appetit!";
         }
         else
         {
             level++;
-            countText.text = "Next Level!";
+            countText.text = "Delicious!";
         }
 
         foreach (var card in cardList)

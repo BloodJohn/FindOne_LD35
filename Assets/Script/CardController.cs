@@ -98,7 +98,7 @@ public class CardController : MonoBehaviour
     private void SetSprite(Sprite newImage)
     {
         sprite.GetComponent<SpriteRenderer>().sprite = newImage;
-
+        
         if (GameController.instance.countFail > 0)
             SetColor();
         else
