@@ -159,6 +159,12 @@ public class GameController : MonoBehaviour
         {
             if (level < 5) return 2;
             if (level < 10) return 3;
+            if (level < 15) return 4;
+            if (level < 20) return 5;
+            if (level < 25) return 6;
+            if (level < 30) return 7;
+            if (level < 35) return 8;
+            if (level < 40) return 9;
             return mushroomList.Length;
         }
     }
