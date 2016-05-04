@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public Text objectiveText;
     public Text countText;
     public Text levelText;
+    public Text timerText;
 
     public Sprite[] snailList;
     public Sprite[] mushroomList;
@@ -20,11 +21,14 @@ public class GameController : MonoBehaviour
     private int countTotal = 0;
     public int countFail = 0;
     private int countWhite = 0;
+    private float timer;
+    private float timerPrev;
     private int level = 1;
     private bool restartingLevel = false;
 
     public static GameController instance;
     private List<CardController> cardList = new List<CardController>(10);
+    private const float timerTotal = 120f;
 
     void Awake()
     {
@@ -46,6 +50,27 @@ public class GameController : MonoBehaviour
     void Update()
     {
         if (restartingLevel) return;
+
+        if (countFail < 2 && timerTotal > timer)
+        {
+            timer += Time.deltaTime;
+            if (timer - timerPrev >= 0.1f)
+            {
+                if (timerTotal - timer > 99f)
+                    timerText.text = string.Format("{0:###}", timerTotal - timer);
+                else if (timerTotal - timer > 9f)
+                    timerText.text = string.Format("{0:##.#}", timerTotal - timer);
+                else
+                    timerText.text = string.Format("{0:#.##}", timerTotal - timer);
+                timerPrev = timer;
+            }
+        }
+        else if (countFail < 2)
+        {
+            timer = timerTotal;
+            countFail = 2;
+            GameOver();
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -108,8 +133,10 @@ public class GameController : MonoBehaviour
         objectiveText.text = "Game Over!";
         countText.text = string.Format("Total {0}", countTotal);
 
-        //foreach (var card in cardList) card.SetColor();
-
+        timerPrev = timer;
+        if (countTotal > 0)
+            timerText.text = string.Format("{0:##.#}/sec", countTotal/ timerPrev);
+        
         gameOver = true;
     }
 
@@ -122,12 +149,16 @@ public class GameController : MonoBehaviour
         objectiveText.text = "Tap only edible\nmushrooms";
         count = 0;
         countWhite = 0;
+        
 
         if (firstLevel)
         {
             level = 1;
             countTotal = 0;
             countFail = 0;
+            timer = 0f;
+            timerPrev = 0f;
+            timerText.text = string.Empty;
         }
         else
         {
