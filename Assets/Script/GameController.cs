@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour
                 else if (timerTotal - timer > 9f)
                     timerText.text = string.Format("{0:##.#}", timerTotal - timer);
                 else
-                    timerText.text = string.Format("{0:#.##}", timerTotal - timer);
+                    timerText.text = string.Format("{0:0.##}", timerTotal - timer);
                 timerPrev = timer;
             }
         }
@@ -72,7 +72,8 @@ public class GameController : MonoBehaviour
             GameOver();
         }
 
-        if (Input.GetMouseButtonDown(0))
+        //if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             if (gameOver)
             {
@@ -135,21 +136,24 @@ public class GameController : MonoBehaviour
 
         timerPrev = timer;
         if (countTotal > 0)
-            timerText.text = string.Format("{0:##.#}/sec", countTotal/ timerPrev);
-        
+            timerText.text = string.Format("{0:#0.#}/sec", countTotal / timerPrev);
+
         gameOver = true;
     }
 
     private IEnumerator RestartLevel(bool firstLevel)
     {
         restartingLevel = true;
-        yield return new WaitForSeconds(0.5f);
+        if (gameOver)
+            yield return new WaitForSeconds(2.5f);
+        else
+            yield return new WaitForSeconds(0.5f);
 
         gameOver = false;
-        objectiveText.text = "Tap only edible\nmushrooms";
+        objectiveText.text = "Tap only edible mushrooms";
         count = 0;
         countWhite = 0;
-        
+
 
         if (firstLevel)
         {
