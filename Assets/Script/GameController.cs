@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public class GameController : MonoBehaviour
 {
-    public Text objectiveText;
     public Text countText;
     public Text levelText;
     public Text timerText;
@@ -42,7 +41,6 @@ public class GameController : MonoBehaviour
         foreach (var card in allCard)
             cardList.Add(card);
 
-        countText.text = "Simen the Snail";
         StartCoroutine(RestartLevel(true));
     }
 
@@ -77,7 +75,7 @@ public class GameController : MonoBehaviour
         {
             if (gameOver)
             {
-                countText.text = "Bon appetit!";
+                countText.text = "Game Over!";
                 StartCoroutine(RestartLevel(true));
                 return;
             }
@@ -131,7 +129,6 @@ public class GameController : MonoBehaviour
 
     private void GameOver()
     {
-        objectiveText.text = "Game Over!";
         countText.text = string.Format("Total {0}", countTotal);
 
         timerPrev = timer;
@@ -145,12 +142,12 @@ public class GameController : MonoBehaviour
     {
         restartingLevel = true;
         if (gameOver)
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(5f);
         else
             yield return new WaitForSeconds(0.5f);
 
         gameOver = false;
-        objectiveText.text = "Tap only edible mushrooms";
+        countText.text = "The Simon Snail";
         count = 0;
         countWhite = 0;
 
