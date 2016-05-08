@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
@@ -75,7 +76,6 @@ public class GameController : MonoBehaviour
         {
             if (gameOver)
             {
-                countText.text = "Game Over!";
                 StartCoroutine(RestartLevel(true));
                 return;
             }
@@ -147,7 +147,6 @@ public class GameController : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
 
         gameOver = false;
-        countText.text = "The Simon Snail";
         count = 0;
         countWhite = 0;
 
@@ -159,7 +158,9 @@ public class GameController : MonoBehaviour
             countFail = 0;
             timer = 0f;
             timerPrev = 0f;
-            timerText.text = string.Empty;
+
+            countText.text = "The Simon Snail";
+            //timerText.text = String.Empty;
         }
         else
         {
