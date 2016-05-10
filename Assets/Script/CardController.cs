@@ -34,6 +34,7 @@ public class CardController : MonoBehaviour
 
     public void Restart()
     {
+        gameObject.SetActive(true);
         typeImage = Random.Range(0, GameController.instance.MushroomMax);
         UpdateStats();
     }
@@ -62,7 +63,7 @@ public class CardController : MonoBehaviour
         }
     }
 
-    public void SetColor()
+    private void SetColor()
     {
         var color = Color.white;
 
@@ -78,6 +79,16 @@ public class CardController : MonoBehaviour
     internal void DrawDeath()
     {
         SetSprite(GameController.instance.snailList[2]);
+    }
+
+    internal void HidePoison()
+    {
+        gameObject.SetActive(IsGood || isSelected);
+    }
+
+    internal void HideAny()
+    {
+        gameObject.SetActive(false);
     }
 
     private void SetSprite(Sprite newImage)

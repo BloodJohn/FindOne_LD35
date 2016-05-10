@@ -68,6 +68,10 @@ public class GameController : MonoBehaviour
         {
             timer = timerTotal;
             countFail = 2;
+
+            foreach (var card in cardList)
+                card.HidePoison();
+
             GameOver();
         }
 
@@ -120,6 +124,10 @@ public class GameController : MonoBehaviour
                     if (countFail > 1)
                     {
                         clickCard.DrawDeath();
+                        foreach (var card in cardList)
+                            if (card != clickCard)
+                                card.HideAny();
+
                         GameOver();
                     }
                 }
@@ -142,7 +150,7 @@ public class GameController : MonoBehaviour
     {
         restartingLevel = true;
         if (gameOver)
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(1f);
         else
             yield return new WaitForSeconds(0.5f);
 
