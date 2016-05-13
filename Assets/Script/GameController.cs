@@ -178,8 +178,6 @@ public class GameController : MonoBehaviour
         timer = 0f;
         timerPrev = 0f;
 
-        countText.text = "The Simon Snail";
-
         //ждем пока отпустит палет от экрана
         while (Input.GetMouseButton(0)) yield return new WaitForSeconds(0.1f);
         //держим паузу для приличия        
@@ -187,6 +185,7 @@ public class GameController : MonoBehaviour
         //ждем пока нажмет еще разок
         while (!Input.GetMouseButton(0)) yield return null;
 
+        countText.text = "The Simon Snail";
 
         yield return RestartLevel();
     }
