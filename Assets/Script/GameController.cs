@@ -16,7 +16,6 @@ public class GameController : MonoBehaviour
     public string[] levelNameList;
     public Color[] colorList;
 
-    private bool gameOver = false;
     /// <summary>Съедено хороших грибов на экране</summary>
     private int count = 0;
     /// <summary>Всего съедено хороших грибов</summary>
@@ -37,7 +36,7 @@ public class GameController : MonoBehaviour
 
     public static GameController instance;
     private List<CardController> cardList = new List<CardController>(10);
-    private const float timerTotal = 120f;
+    private const float timerTotal = 90f;
 
     void Awake()
     {
@@ -51,7 +50,7 @@ public class GameController : MonoBehaviour
         foreach (var card in allCard)
             cardList.Add(card);
 
-        StartCoroutine(RestartLevel(true));
+        StartCoroutine(RestartLevel());
     }
 
     // Update is called once per frame
@@ -65,16 +64,8 @@ public class GameController : MonoBehaviour
         {
             FinishCombo();
         }
-
-        //if (Input.GetMouseButtonDown(0))
-        if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButton(0))
         {
-            if (gameOver)
-            {
-                StartCoroutine(RestartLevel(true));
-                return;
-            }
-
             CheckMousePos();
         }
     }
@@ -135,13 +126,12 @@ public class GameController : MonoBehaviour
             countTotal++;
             countText.text = countTotal.ToString();
             clickCard.sound.PlayOneShot(soundList[0]);
-            clickCard.transform.localScale = Vector3.one * (1.05f - 0.05f*comboCount);
+            clickCard.transform.localScale = Vector3.one * (1.05f - 0.05f * comboCount);
 
             if (count >= countWhite) //все хорошие грибы съедены (след. уровень/экран!)
             {
                 countText.text = "Delicious!";
-                StartCoroutine(RestartLevel(false));
-                return;
+                StartCoroutine(RestartLevel());
             }
         }
         else
@@ -175,41 +165,44 @@ public class GameController : MonoBehaviour
         if (countTotal > 0)
             timerText.text = string.Format("{0:#0.#}/sec", countTotal / timerPrev);
 
-        gameOver = true;
+
+        StartCoroutine(EndGame());
     }
 
-    private IEnumerator RestartLevel(bool firstLevel)
+    private IEnumerator EndGame()
+    {
+        restartingLevel = true;
+        level = 0;
+        countTotal = 0;
+        countFail = 0;
+        timer = 0f;
+        timerPrev = 0f;
+
+        countText.text = "The Simon Snail";
+
+        //ждем пока отпустит палет от экрана
+        while (Input.GetMouseButton(0)) yield return new WaitForSeconds(0.1f);
+        //держим паузу для приличия        
+        //yield return new WaitForSeconds(1f);
+        //ждем пока нажмет еще разок
+        while (!Input.GetMouseButton(0)) yield return null;
+
+
+        yield return RestartLevel();
+    }
+
+    private IEnumerator RestartLevel()
     {
         restartingLevel = true;
         //ждем пока отпустит палет от экрана
         while (Input.GetMouseButton(0)) yield return new WaitForSeconds(0.1f);
+        //держим паузу для приличия        
+        //yield return new WaitForSeconds(0.5f);
 
-
-        if (gameOver)
-            yield return new WaitForSeconds(1f);
-        else
-            yield return new WaitForSeconds(0.5f);
-
-        gameOver = false;
         count = 0;
         countWhite = 0;
         FinishCombo();
-
-
-        if (firstLevel)
-        {
-            level = 1;
-            countTotal = 0;
-            countFail = 0;
-            timer = 0f;
-            timerPrev = 0f;
-
-            countText.text = "The Simon Snail";
-        }
-        else
-        {
-            level++;
-        }
+        level++;
 
         if (level <= levelNameList.Length)
         {
