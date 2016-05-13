@@ -34,6 +34,7 @@ public class CardController : MonoBehaviour
 
     public void Restart()
     {
+        gameObject.transform.localScale = Vector3.one;
         gameObject.SetActive(true);
         typeImage = Random.Range(0, GameController.instance.MushroomMax);
         UpdateStats();

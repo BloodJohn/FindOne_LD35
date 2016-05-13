@@ -17,14 +17,23 @@ public class GameController : MonoBehaviour
     public Color[] colorList;
 
     private bool gameOver = false;
+    /// <summary>Съедено хороших грибов на экране</summary>
     private int count = 0;
+    /// <summary>Всего съедено хороших грибов</summary>
     private int countTotal = 0;
+    /// <summary>Съедено ядовитых грибов</summary>
     public int countFail = 0;
+    /// <summary>Всего хороших грибов</summary>
     private int countWhite = 0;
+    /// <summary>текущее время игры</summary>
     private float timer;
+    /// <summary>последнее обновление таймера</summary>
     private float timerPrev;
     private int level = 1;
+    /// <summary>Режим перезагрузки уровня</summary>
     private bool restartingLevel = false;
+    /// <summary>Грибов съедено одним махом</summary>
+    private int comboCount = 0;
 
     public static GameController instance;
     private List<CardController> cardList = new List<CardController>(10);
@@ -50,7 +59,31 @@ public class GameController : MonoBehaviour
     {
         if (restartingLevel) return;
 
-        if (countFail < 2 && timerTotal > timer)
+        UpdateTimer();
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            FinishCombo();
+        }
+
+        //if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
+        {
+            if (gameOver)
+            {
+                StartCoroutine(RestartLevel(true));
+                return;
+            }
+
+            CheckMousePos();
+        }
+    }
+
+    private void UpdateTimer()
+    {
+        if (countFail >= 2) return; //улитка умерла
+
+        if (timerTotal > timer) //время еще есть
         {
             timer += Time.deltaTime;
             if (timer - timerPrev >= 0.1f)
@@ -64,7 +97,7 @@ public class GameController : MonoBehaviour
                 timerPrev = timer;
             }
         }
-        else if (countFail < 2)
+        else //время закончилось
         {
             timer = timerTotal;
             countFail = 2;
@@ -74,65 +107,64 @@ public class GameController : MonoBehaviour
 
             GameOver();
         }
+    }
 
-        //if (Input.GetMouseButtonDown(0))
-        if (Input.GetMouseButton(0))
-        {
-            if (gameOver)
+    private void CheckMousePos()
+    {
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var hitCollider = Physics2D.OverlapPoint(mousePosition);
+        if (hitCollider == null) return;
+        CardController clickCard = null;
+
+        foreach (var card in cardList)
+            if (hitCollider == card.collider)
             {
-                StartCoroutine(RestartLevel(true));
+                clickCard = card;
+                break;
+            }
+
+        if (clickCard == null) return;
+        if (clickCard.isSelected) return;
+
+        clickCard.OnClick();
+
+        if (clickCard.IsGood)
+        {
+            count++;
+            comboCount++;
+            countTotal++;
+            countText.text = countTotal.ToString();
+            clickCard.sound.PlayOneShot(soundList[0]);
+            clickCard.transform.localScale = Vector3.one * (1.05f - 0.05f*comboCount);
+
+            if (count >= countWhite) //все хорошие грибы съедены (след. уровень/экран!)
+            {
+                countText.text = "Delicious!";
+                StartCoroutine(RestartLevel(false));
                 return;
             }
+        }
+        else
+        {
+            countFail++;
+            clickCard.sound.PlayOneShot(soundList[1]);
+            FinishCombo();
 
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var hitCollider = Physics2D.OverlapPoint(mousePosition);
-            if (hitCollider != null)
+            if (countFail > 1)
             {
-                CardController clickCard = null;
-
+                clickCard.DrawDeath();
                 foreach (var card in cardList)
-                    if (hitCollider == card.collider)
-                    {
-                        clickCard = card;
-                        break;
-                    }
+                    if (card != clickCard)
+                        card.HideAny();
 
-                if (clickCard == null) return;
-                if (clickCard.isSelected) return;
-
-                clickCard.OnClick();
-
-                if (clickCard.IsGood)
-                {
-                    count++;
-                    countTotal++;
-                    countText.text = countTotal.ToString();
-                    clickCard.sound.PlayOneShot(soundList[0]);
-
-                    if (count >= countWhite)
-                    {
-                        countText.text = "Delicious!";
-                        StartCoroutine(RestartLevel(false));
-                        return;
-                    }
-                }
-                else
-                {
-                    countFail++;
-                    clickCard.sound.PlayOneShot(soundList[1]);
-
-                    if (countFail > 1)
-                    {
-                        clickCard.DrawDeath();
-                        foreach (var card in cardList)
-                            if (card != clickCard)
-                                card.HideAny();
-
-                        GameOver();
-                    }
-                }
+                GameOver();
             }
         }
+    }
+
+    private void FinishCombo()
+    {
+        comboCount = 0;
     }
 
     private void GameOver()
@@ -149,6 +181,10 @@ public class GameController : MonoBehaviour
     private IEnumerator RestartLevel(bool firstLevel)
     {
         restartingLevel = true;
+        //ждем пока отпустит палет от экрана
+        while (Input.GetMouseButton(0)) yield return new WaitForSeconds(0.1f);
+
+
         if (gameOver)
             yield return new WaitForSeconds(1f);
         else
@@ -157,6 +193,7 @@ public class GameController : MonoBehaviour
         gameOver = false;
         count = 0;
         countWhite = 0;
+        FinishCombo();
 
 
         if (firstLevel)
@@ -168,7 +205,6 @@ public class GameController : MonoBehaviour
             timerPrev = 0f;
 
             countText.text = "The Simon Snail";
-            //timerText.text = String.Empty;
         }
         else
         {
