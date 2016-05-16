@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class GameController : MonoBehaviour
 {
+    public Camera mainCamera;
     public Text countText;
     public Text levelText;
     public Text timerText;
@@ -102,7 +103,7 @@ public class GameController : MonoBehaviour
 
     private void CheckMousePos()
     {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         var hitCollider = Physics2D.OverlapPoint(mousePosition);
         if (hitCollider == null) return;
         CardController clickCard = null;
