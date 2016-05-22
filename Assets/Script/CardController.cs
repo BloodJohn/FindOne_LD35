@@ -6,7 +6,7 @@ public class CardController : MonoBehaviour
     public GameObject sprite;
     public AudioSource sound;
     /// <summary>Тип гриба (0,1 - хорошие, 2,3 - плохие)</summary>
-    private int typeImage;
+    public int typeImage;
     /// <summary>Уже сыгравшая карта (вбрана)</summary>
     public bool isSelected;
     private Color color;

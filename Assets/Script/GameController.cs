@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.Advertisements;
+using UnityEngine.Analytics;
 
 public class GameController : MonoBehaviour
 {
@@ -11,12 +12,15 @@ public class GameController : MonoBehaviour
     public Text levelText;
     public Text timerText;
 
+    public VictoryController victoryPanel;
+
     public Sprite[] snailList;
     public Sprite[] mushroomList;
     public AudioClip[] soundList;
     public string[] levelNameList;
     public Color[] colorList;
 
+    #region private variables
     /// <summary>Съедено хороших грибов на экране</summary>
     private int count = 0;
     /// <summary>Всего съедено хороших грибов</summary>
@@ -34,11 +38,15 @@ public class GameController : MonoBehaviour
     private bool restartingLevel = false;
     /// <summary>Грибов съедено одним махом</summary>
     private int comboCount = 0;
+    /// <summary>индекс последнего съеденного гриба</summary>
+    private int lastClick = 0;
 
     public static GameController instance;
     private List<CardController> cardList = new List<CardController>(10);
-    private const float timerTotal = 90f;
+    private const float timerTotal = 90f; //90
+    #endregion
 
+    #region Unity
     void Awake()
     {
         instance = this;
@@ -70,6 +78,7 @@ public class GameController : MonoBehaviour
             CheckMousePos();
         }
     }
+    #endregion
 
     private void UpdateTimer()
     {
@@ -95,9 +104,9 @@ public class GameController : MonoBehaviour
             countFail = 2;
 
             foreach (var card in cardList)
-                card.HidePoison();
+                card.HideAny(); //HidePoison
 
-            GameOver();
+            StartCoroutine(GameOver(true));
         }
     }
 
@@ -144,11 +153,12 @@ public class GameController : MonoBehaviour
             if (countFail > 1)
             {
                 clickCard.DrawDeath();
+                lastClick = clickCard.typeImage;
                 foreach (var card in cardList)
                     if (card != clickCard)
                         card.HideAny();
 
-                GameOver();
+                StartCoroutine(GameOver(false));
             }
         }
     }
@@ -158,20 +168,28 @@ public class GameController : MonoBehaviour
         comboCount = 0;
     }
 
-    private void GameOver()
+    private IEnumerator GameOver(bool isFinishTime)
     {
         countText.text = string.Format("Total {0}", countTotal);
 
         timerPrev = timer;
         if (countTotal > 0)
-            timerText.text = string.Format("{0:#0.#}/sec", countTotal / timerPrev);
+        {
+            timerText.text = string.Format("{0:#0.#}/sec", countTotal/timerPrev);
 
+            victoryPanel.SetRate(countTotal/timerPrev);
+        }
+        //else totalRate.text = "Tap only edible mushrooms";
 
-        StartCoroutine(EndGame());
-    }
+        Analytics.CustomEvent("game over", new Dictionary<string, object>
+          {
+            { "total", countTotal },
+            { "fail", countFail },
+            { "level", level },
+            { "time", timerPrev },
+            { "rate", countTotal / timerPrev }
+          });
 
-    private IEnumerator EndGame()
-    {
         restartingLevel = true;
         level = 0;
         countTotal = 0;
@@ -179,10 +197,17 @@ public class GameController : MonoBehaviour
         timer = 0f;
         timerPrev = 0f;
 
-        //ждем пока отпустит палет от экрана
+        //ждем пока отпустит палец от экрана
         while (Input.GetMouseButton(0)) yield return new WaitForSeconds(0.1f);
+
+        if (isFinishTime)
+        {
+            ShowVictory();
+            yield break;
+        }
+
         //держим паузу для приличия        
-        //yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(2f);
         //ждем пока нажмет еще разок
         while (!Input.GetMouseButton(0)) yield return null;
 
@@ -194,7 +219,7 @@ public class GameController : MonoBehaviour
     private IEnumerator RestartLevel()
     {
         restartingLevel = true;
-        //ждем пока отпустит палет от экрана
+        //ждем пока отпустит палец от экрана
         while (Input.GetMouseButton(0)) yield return new WaitForSeconds(0.1f);
         //держим паузу для приличия        
         //yield return new WaitForSeconds(0.5f);
@@ -237,5 +262,19 @@ public class GameController : MonoBehaviour
             if (level < 40) return 9;
             return mushroomList.Length;
         }
+    }
+
+    private void ShowVictory()
+    {
+        restartingLevel = true;
+        foreach (var card in cardList)
+            card.HideAny();
+
+        victoryPanel.ShowVictory();
+    }
+
+    public void HideVictory()
+    {
+        StartCoroutine(RestartLevel());
     }
 }
