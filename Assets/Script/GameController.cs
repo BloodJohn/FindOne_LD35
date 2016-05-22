@@ -176,7 +176,6 @@ public class GameController : MonoBehaviour
         if (countTotal > 0)
         {
             timerText.text = string.Format("{0:#0.#}/sec", countTotal/timerPrev);
-
             victoryPanel.SetRate(countTotal/timerPrev);
         }
         //else totalRate.text = "Tap only edible mushrooms";

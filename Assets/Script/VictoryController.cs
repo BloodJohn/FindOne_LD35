@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class VictoryController : MonoBehaviour
 {
     public GameController game;
+    public GameObject gamePanel;
     public Text finalRate;
     public Text countDownText;
     public Button startGame;
@@ -17,7 +18,7 @@ public class VictoryController : MonoBehaviour
     private float countDownTimer;
     private float oldTimer;
 
-    private const float delayStart = 90f;
+    private const float delayStart = 90f;//90
 
     // Use this for initialization
     void Start()
@@ -50,11 +51,12 @@ public class VictoryController : MonoBehaviour
 
     public void SetRate(float rate)
     {
-        finalRate.text = string.Format("{0:#0.###}/sec", rate);
+        finalRate.text = string.Format("Rate {0:#0.000} /sec", rate);
     }
 
     public void ShowVictory()
     {
+        gamePanel.SetActive(false);
         gameObject.SetActive(true);
         startGame.gameObject.SetActive(false);
         startAds.gameObject.SetActive(true);
@@ -66,9 +68,10 @@ public class VictoryController : MonoBehaviour
     /// <summary>Вызывается по кнопке startGame</summary>
     public void BackToGame()
     {
-        Debug.Log("BackToGame");
+        gamePanel.SetActive(true);
         game.HideVictory();
         gameObject.SetActive(false);
+        
     }
 
     /// <summary>Вызывается по кнопке startAds</summary>
