@@ -51,11 +51,14 @@ public class GameController : MonoBehaviour
     {
         instance = this;
 
-        var localCode = System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
-        Debug.LogFormat("culture: {0}", localCode);
-
-        if (!LanguageManager.Instance.IsLanguageSupported(localCode)) localCode = "en";
-        LanguageManager.Instance.ChangeLanguage(localCode);
+        if (Application.systemLanguage == SystemLanguage.Russian)
+        {
+            LanguageManager.Instance.ChangeLanguage("ru");
+        }
+        else
+        {
+            LanguageManager.Instance.ChangeLanguage("en");
+        }
     }
 
     // Use this for initialization
