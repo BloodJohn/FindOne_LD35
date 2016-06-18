@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SmartLocalization;
+using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
 
@@ -9,6 +10,8 @@ public class VictoryController : MonoBehaviour
     public GameObject gamePanel;
     public Text finalRate;
     public Text countDownText;
+    public Text winText;
+    public Text adsText;
     public Button startGame;
     public Button startAds;
     
@@ -20,11 +23,6 @@ public class VictoryController : MonoBehaviour
 
     private const float delayStart = 90f;//90
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -38,7 +36,7 @@ public class VictoryController : MonoBehaviour
             if (Mathf.Round(countDownTimer) != oldTimer)
             {
                 oldTimer = Mathf.Round(countDownTimer);
-                countDownText.text = string.Format("Wait {0:#0} sec", oldTimer);
+                countDownText.text = string.Format(LanguageManager.Instance.GetTextValue("WaitSec"), oldTimer);
             }
         }
         else
@@ -51,13 +49,17 @@ public class VictoryController : MonoBehaviour
 
     public void SetRate(float rate)
     {
-        finalRate.text = string.Format("Rate {0:#0.000} /sec", rate);
+        finalRate.text = string.Format(LanguageManager.Instance.GetTextValue("RateSec"), rate);
     }
 
     public void ShowVictory()
     {
+        winText.text = LanguageManager.Instance.GetTextValue("YouWin");
+        adsText.text = LanguageManager.Instance.GetTextValue("AdsButton");
+
+
         gamePanel.SetActive(false);
-        gameObject.SetActive(true);
+        gameObject.SetActive(true); 
         startGame.gameObject.SetActive(false);
         startAds.gameObject.SetActive(true);
 

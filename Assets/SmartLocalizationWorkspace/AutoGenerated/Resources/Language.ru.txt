@@ -116,7 +116,148 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+	<data name="AdsButton" xml:space="preserve">
+		<value>Рекламная Пауза</value>
+	</data>
+	<data name="Delicious" xml:space="preserve">
+		<value>Вкусно!</value>
+	</data>
+	<data name="level_1" xml:space="preserve">
+		<value>Выбери съедобные грибы</value>
+	</data>
+	<data name="level_10" xml:space="preserve">
+		<value>Бледная поганка - ядовитая</value>
+	</data>
+	<data name="level_11" xml:space="preserve">
+		<value>Хорошая улитка - толстая</value>
+	</data>
+	<data name="level_12" xml:space="preserve">
+		<value>Бледная поганка - зеленый мухомор</value>
+	</data>
+	<data name="level_13" xml:space="preserve">
+		<value>Суп из белых грибов</value>
+	</data>
+	<data name="level_14" xml:space="preserve">
+		<value>Русские любят грибы</value>
+	</data>
+	<data name="level_15" xml:space="preserve">
+		<value>Грибы старше динозавров</value>
+	</data>
+	<data name="level_16" xml:space="preserve">
+		<value>В Рязания - грибы с глазами</value>
+	</data>
+	<data name="level_17" xml:space="preserve">
+		<value>Мухомор умеет ждать</value>
+	</data>
+	<data name="level_18" xml:space="preserve">
+		<value>Пицца без грибов - деньги на ветер</value>
+	</data>
+	<data name="level_19" xml:space="preserve">
+		<value>Ползи улитка, ползи!</value>
+	</data>
+	<data name="level_2" xml:space="preserve">
+		<value>Шампиньоны для чемпионов</value>
+	</data>
+	<data name="level_20" xml:space="preserve">
+		<value>Ты еще здесь?</value>
+	</data>
+	<data name="level_21" xml:space="preserve">
+		<value>Тебе настолько нравятся грибы?</value>
+	</data>
+	<data name="level_22" xml:space="preserve">
+		<value>Хватит есть грибы</value>
+	</data>
+	<data name="level_23" xml:space="preserve">
+		<value>Они не любят когда их едят</value>
+	</data>
+	<data name="level_24" xml:space="preserve">
+		<value>Улитка Семен, прекрати!</value>
+	</data>
+	<data name="level_25" xml:space="preserve">
+		<value>Полное пузо грибов</value>
+	</data>
+	<data name="level_26" xml:space="preserve">
+		<value>Грибы любят тень</value>
+	</data>
+	<data name="level_27" xml:space="preserve">
+		<value>Кричать - грибы пугать</value>
+	</data>
+	<data name="level_28" xml:space="preserve">
+		<value>Гриб стар, да корень свеж</value>
+	</data>
+	<data name="level_29" xml:space="preserve">
+		<value>Царство грибов</value>
+	</data>
+	<data name="level_3" xml:space="preserve">
+		<value>Мухи дохнут от мухомора</value>
+	</data>
+	<data name="level_30" xml:space="preserve">
+		<value>Будет дождь - будут грибы</value>
+	</data>
+	<data name="level_31" xml:space="preserve">
+		<value>Марио тоже любит грибы</value>
+	</data>
+	<data name="level_32" xml:space="preserve">
+		<value>Ищи грибы в лесу, а не в магазине</value>
+	</data>
+	<data name="level_33" xml:space="preserve">
+		<value>Грибы на завтрак</value>
+	</data>
+	<data name="level_34" xml:space="preserve">
+		<value>Прыгающий гриб</value>
+	</data>
+	<data name="level_35" xml:space="preserve">
+		<value>Ведьмин круг</value>
+	</data>
+	<data name="level_36" xml:space="preserve">
+		<value>Грибные эльфы</value>
+	</data>
+	<data name="level_37" xml:space="preserve">
+		<value>Улитка Семен</value>
+	</data>
+	<data name="level_38" xml:space="preserve">
+		<value>Мастер Улитка</value>
+	</data>
+	<data name="level_39" xml:space="preserve">
+		<value>Ниндзя Улитка</value>
+	</data>
+	<data name="level_4" xml:space="preserve">
+		<value>Барсеркер и мухоморы</value>
+	</data>
+	<data name="level_40" xml:space="preserve">
+		<value>Улитка Фуджи</value>
+	</data>
+	<data name="level_5" xml:space="preserve">
+		<value>Лисичка сестричка</value>
+	</data>
+	<data name="level_6" xml:space="preserve">
+		<value>Откуси справа - вырастешь</value>
+	</data>
+	<data name="level_7" xml:space="preserve">
+		<value>Откуси слева - уменьшишся</value>
+	</data>
+	<data name="level_8" xml:space="preserve">
+		<value>Говорушка оранжевая - ложная лиса</value>
+	</data>
+	<data name="level_9" xml:space="preserve">
+		<value>Съешь лисичку, от воспаленных глаз</value>
+	</data>
+	<data name="RateSec" xml:space="preserve">
+		<value>{0:#0.000} гриб/сек</value>
+	</data>
 	<data name="TheSimonSnail" xml:space="preserve">
 		<value>Улитка Семен</value>
+	</data>
+	<data name="Total" xml:space="preserve">
+		<value>Съедено {0}</value>
+	</data>
+	<data name="TotalSec" xml:space="preserve">
+		<value>{0:#0.#}/сек.</value>
+	</data>
+	<data name="WaitSec" xml:space="preserve">
+		<value>Осталось {0:#0} сек.</value>
+	</data>
+	<data name="YouWin" xml:space="preserve">
+		<value>Победа!</value>
 	</data>
 </root>

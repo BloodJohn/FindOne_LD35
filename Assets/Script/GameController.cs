@@ -18,7 +18,6 @@ public class GameController : MonoBehaviour
     public Sprite[] snailList;
     public Sprite[] mushroomList;
     public AudioClip[] soundList;
-    public string[] levelNameList;
     public Color[] colorList;
 
     #region private variables
@@ -34,7 +33,7 @@ public class GameController : MonoBehaviour
     private float timer;
     /// <summary>последнее обновление таймера</summary>
     private float timerPrev;
-    private int level = 1;
+    private int level = 0;
     /// <summary>Режим перезагрузки уровня</summary>
     private bool restartingLevel = false;
     /// <summary>Грибов съедено одним махом</summary>
@@ -51,7 +50,12 @@ public class GameController : MonoBehaviour
     void Awake()
     {
         instance = this;
-        LanguageManager.Instance.ChangeLanguage("ru");
+
+        var localCode = System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+        Debug.LogFormat("culture: {0}", localCode);
+
+        if (!LanguageManager.Instance.IsLanguageSupported(localCode)) localCode = "en";
+        LanguageManager.Instance.ChangeLanguage(localCode);
     }
 
     // Use this for initialization
@@ -144,7 +148,7 @@ public class GameController : MonoBehaviour
 
             if (count >= countWhite) //все хорошие грибы съедены (след. уровень/экран!)
             {
-                countText.text = "Delicious!";
+                countText.text = LanguageManager.Instance.GetTextValue("Delicious");
                 StartCoroutine(RestartLevel());
             }
         }
@@ -174,12 +178,12 @@ public class GameController : MonoBehaviour
 
     private IEnumerator GameOver(bool isFinishTime)
     {
-        countText.text = string.Format("Total {0}", countTotal);
+        countText.text = string.Format(LanguageManager.Instance.GetTextValue("Total"), countTotal);
 
         timerPrev = timer;
         if (countTotal > 0)
         {
-            timerText.text = string.Format("{0:#0.#}/sec", countTotal/timerPrev);
+            timerText.text = string.Format(LanguageManager.Instance.GetTextValue("TotalSec"), countTotal/timerPrev);
             victoryPanel.SetRate(countTotal/timerPrev);
         }
         //else totalRate.text = "Tap only edible mushrooms";
@@ -232,9 +236,11 @@ public class GameController : MonoBehaviour
         FinishCombo();
         level++;
 
-        if (level <= levelNameList.Length)
+        var keyLevel = string.Format("level_{0}", level);
+
+        if (LanguageManager.Instance.HasKey(keyLevel))
         {
-            levelText.text = levelNameList[level - 1];
+            levelText.text = LanguageManager.Instance.GetTextValue(keyLevel);
         }
         else
         {

@@ -116,7 +116,148 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+	<data name="AdsButton" xml:space="preserve">
+		<value>Play Ads</value>
+	</data>
+	<data name="Delicious" xml:space="preserve">
+		<value>Delicious!</value>
+	</data>
+	<data name="level_1" xml:space="preserve">
+		<value>Tap only edible mushrooms</value>
+	</data>
+	<data name="level_10" xml:space="preserve">
+		<value>Pale toadstool poison Fungi</value>
+	</data>
+	<data name="level_11" xml:space="preserve">
+		<value>Good snail fat snail</value>
+	</data>
+	<data name="level_12" xml:space="preserve">
+		<value>Pale toadstool green Amanita</value>
+	</data>
+	<data name="level_13" xml:space="preserve">
+		<value>Mushroom soup is hearty</value>
+	</data>
+	<data name="level_14" xml:space="preserve">
+		<value>Russian eat mushrooms</value>
+	</data>
+	<data name="level_15" xml:space="preserve">
+		<value>Fungi older than dinosaurs</value>
+	</data>
+	<data name="level_16" xml:space="preserve">
+		<value>In Ryazan mushrooms with eyes</value>
+	</data>
+	<data name="level_17" xml:space="preserve">
+		<value>Fly agaric can waiting you</value>
+	</data>
+	<data name="level_18" xml:space="preserve">
+		<value>Pizza without Fungi - waste of money</value>
+	</data>
+	<data name="level_19" xml:space="preserve">
+		<value>Crawl Snail, Crawl!</value>
+	</data>
+	<data name="level_2" xml:space="preserve">
+		<value>Champignon for Champions</value>
+	</data>
+	<data name="level_20" xml:space="preserve">
+		<value>Are you still here?</value>
+	</data>
+	<data name="level_21" xml:space="preserve">
+		<value>Do you Love mushrooms?</value>
+	</data>
+	<data name="level_22" xml:space="preserve">
+		<value>Enough to eat the mushrooms</value>
+	</data>
+	<data name="level_23" xml:space="preserve">
+		<value>They don't like this</value>
+	</data>
+	<data name="level_24" xml:space="preserve">
+		<value>Simon the snail, stop it</value>
+	</data>
+	<data name="level_25" xml:space="preserve">
+		<value>Belly full of mushrooms</value>
+	</data>
+	<data name="level_26" xml:space="preserve">
+		<value>They like night and shadow</value>
+	</data>
+	<data name="level_27" xml:space="preserve">
+		<value>Shout - mushrooms scare</value>
+	</data>
+	<data name="level_28" xml:space="preserve">
+		<value>Mushroom old, but root fresh</value>
+	</data>
+	<data name="level_29" xml:space="preserve">
+		<value>The Kingdom of Fungi</value>
+	</data>
+	<data name="level_3" xml:space="preserve">
+		<value>Flies dies from Amanita</value>
+	</data>
+	<data name="level_30" xml:space="preserve">
+		<value>Will rain - will be mushrooms</value>
+	</data>
+	<data name="level_31" xml:space="preserve">
+		<value>Love mushrooms like Mario</value>
+	</data>
+	<data name="level_32" xml:space="preserve">
+		<value>Look in forest, not store</value>
+	</data>
+	<data name="level_33" xml:space="preserve">
+		<value>Mushrooms for Breakfast</value>
+	</data>
+	<data name="level_34" xml:space="preserve">
+		<value>Fungi jumping</value>
+	</data>
+	<data name="level_35" xml:space="preserve">
+		<value>Mushroom circle</value>
+	</data>
+	<data name="level_36" xml:space="preserve">
+		<value>Elf Mushrooms</value>
+	</data>
+	<data name="level_37" xml:space="preserve">
+		<value>Simon snail</value>
+	</data>
+	<data name="level_38" xml:space="preserve">
+		<value>Master snail</value>
+	</data>
+	<data name="level_39" xml:space="preserve">
+		<value>Ninja snail</value>
+	</data>
+	<data name="level_4" xml:space="preserve">
+		<value>Berserker and toadstools</value>
+	</data>
+	<data name="level_40" xml:space="preserve">
+		<value>Fuji snail</value>
+	</data>
+	<data name="level_5" xml:space="preserve">
+		<value>Chanterelle little fox</value>
+	</data>
+	<data name="level_6" xml:space="preserve">
+		<value>One side will make you grow taller</value>
+	</data>
+	<data name="level_7" xml:space="preserve">
+		<value>Other side will make you grow shorter</value>
+	</data>
+	<data name="level_8" xml:space="preserve">
+		<value>Hygrophoropsis aurantiaca - fake</value>
+	</data>
+	<data name="level_9" xml:space="preserve">
+		<value>Inflamed eyes? eat Fox</value>
+	</data>
+	<data name="RateSec" xml:space="preserve">
+		<value>Rate {0:#0.000} /sec</value>
+	</data>
 	<data name="TheSimonSnail" xml:space="preserve">
 		<value>The Simon Snail</value>
+	</data>
+	<data name="Total" xml:space="preserve">
+		<value>Total {0}</value>
+	</data>
+	<data name="TotalSec" xml:space="preserve">
+		<value>{0:#0.#}/sec</value>
+	</data>
+	<data name="WaitSec" xml:space="preserve">
+		<value>Wait {0:#0} sec</value>
+	</data>
+	<data name="YouWin" xml:space="preserve">
+		<value>You Win!</value>
 	</data>
 </root>
