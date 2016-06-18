@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using SmartLocalization;
 using UnityEngine.Advertisements;
 using UnityEngine.Analytics;
 
@@ -50,6 +51,7 @@ public class GameController : MonoBehaviour
     void Awake()
     {
         instance = this;
+        LanguageManager.Instance.ChangeLanguage("ru");
     }
 
     // Use this for initialization
@@ -58,6 +60,8 @@ public class GameController : MonoBehaviour
         var allCard = FindObjectsOfType(typeof(CardController)) as CardController[];
         foreach (var card in allCard)
             cardList.Add(card);
+
+        countText.text = LanguageManager.Instance.GetTextValue("TheSimonSnail");
 
         StartCoroutine(RestartLevel());
     }
@@ -210,7 +214,7 @@ public class GameController : MonoBehaviour
         //ждем пока нажмет еще разок
         while (!Input.GetMouseButton(0)) yield return null;
 
-        countText.text = "The Simon Snail";
+        countText.text = LanguageManager.Instance.GetTextValue("TheSimonSnail");
 
         yield return RestartLevel();
     }
