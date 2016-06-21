@@ -56,6 +56,7 @@ public class CardController : MonoBehaviour
             else
             {
                 SetSprite(GameController.instance.snailList[1]);
+                Handheld.Vibrate();
             }
         }
         else

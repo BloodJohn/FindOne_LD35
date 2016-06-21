@@ -80,13 +80,38 @@ public class GameController : MonoBehaviour
 
         UpdateTimer();
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetKeyUp(KeyCode.Escape))
         {
-            FinishCombo();
+            Application.Quit();
+            return;
         }
-        else if (Input.GetMouseButton(0))
+
+        if (Input.touchSupported)
         {
-            CheckMousePos();
+            foreach (var touch in Input.touches)
+            {
+                if (touch.phase == TouchPhase.Ended)
+                {
+                    FinishCombo();
+                }
+                else if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
+                {
+                    Vector2 mousePosition = mainCamera.ScreenToWorldPoint(touch.position);
+                    CheckMousePos(mousePosition);
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButtonUp(0))
+            {
+                FinishCombo();
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                CheckMousePos(mousePosition);
+            }
         }
     }
     #endregion
@@ -121,9 +146,9 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void CheckMousePos()
+    private void CheckMousePos(Vector2 mousePosition)
     {
-        Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        
         var hitCollider = Physics2D.OverlapPoint(mousePosition);
         if (hitCollider == null) return;
         CardController clickCard = null;
