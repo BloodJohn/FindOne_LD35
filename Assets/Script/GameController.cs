@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     public Text timerText;
 
     public VictoryController victoryPanel;
+    public HelpController helpPanel;
 
     public Sprite[] snailList;
     public Sprite[] mushroomList;
@@ -82,7 +83,8 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            Application.Quit();
+            //Application.Quit();
+            ShowHelp();
             return;
         }
 
@@ -309,6 +311,17 @@ public class GameController : MonoBehaviour
 
         victoryPanel.ShowVictory();
     }
+
+    private void ShowHelp()
+    {
+        restartingLevel = true;
+        foreach (var card in cardList)
+            card.HideAny();
+
+        helpPanel.ShowHelp();
+    }
+
+
 
     public void HideVictory()
     {

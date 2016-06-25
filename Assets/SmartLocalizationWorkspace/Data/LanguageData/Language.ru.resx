@@ -126,10 +126,10 @@
 		<value>Выбери съедобные грибы</value>
 	</data>
 	<data name="level_10" xml:space="preserve">
-		<value>Бледная поганка - ядовитая</value>
+		<value>Бледная поганка - ядовита</value>
 	</data>
 	<data name="level_11" xml:space="preserve">
-		<value>Хорошая улитка - толстая</value>
+		<value>Хорошая улитка - толстая улитка</value>
 	</data>
 	<data name="level_12" xml:space="preserve">
 		<value>Бледная поганка - зеленый мухомор</value>
@@ -144,7 +144,7 @@
 		<value>Грибы старше динозавров</value>
 	</data>
 	<data name="level_16" xml:space="preserve">
-		<value>В Рязания - грибы с глазами</value>
+		<value>В Рязани - грибы с глазами</value>
 	</data>
 	<data name="level_17" xml:space="preserve">
 		<value>Мухомор умеет ждать</value>
@@ -162,7 +162,7 @@
 		<value>Ты еще здесь?</value>
 	</data>
 	<data name="level_21" xml:space="preserve">
-		<value>Тебе настолько нравятся грибы?</value>
+		<value>Тебе нравятся грибы?</value>
 	</data>
 	<data name="level_22" xml:space="preserve">
 		<value>Хватит есть грибы</value>
@@ -241,6 +241,36 @@
 	</data>
 	<data name="level_9" xml:space="preserve">
 		<value>Съешь лисичку, от воспаленных глаз</value>
+	</data>
+	<data name="mushroom_0" xml:space="preserve">
+		<value>Шампиньон</value>
+	</data>
+	<data name="mushroom_1" xml:space="preserve">
+		<value>Мухомор</value>
+	</data>
+	<data name="mushroom_2" xml:space="preserve">
+		<value>Лисичка</value>
+	</data>
+	<data name="mushroom_3" xml:space="preserve">
+		<value>Бледная поганка</value>
+	</data>
+	<data name="mushroom_4" xml:space="preserve">
+		<value>Опенок</value>
+	</data>
+	<data name="mushroom_5" xml:space="preserve">
+		<value>Навозник</value>
+	</data>
+	<data name="mushroom_6" xml:space="preserve">
+		<value>Груздь</value>
+	</data>
+	<data name="mushroom_7" xml:space="preserve">
+		<value>Волоконница</value>
+	</data>
+	<data name="mushroom_8" xml:space="preserve">
+		<value>Белый гриб</value>
+	</data>
+	<data name="mushroom_9" xml:space="preserve">
+		<value>Строчок</value>
 	</data>
 	<data name="RateSec" xml:space="preserve">
 		<value>{0:#0.000} гриб/сек</value>
