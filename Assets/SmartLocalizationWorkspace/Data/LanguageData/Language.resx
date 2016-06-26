@@ -242,6 +242,36 @@
 	<data name="level_9" xml:space="preserve">
 		<value>Inflamed eyes? eat Fox</value>
 	</data>
+	<data name="mushroom_0" xml:space="preserve">
+		<value>Button mushroom</value>
+	</data>
+	<data name="mushroom_1" xml:space="preserve">
+		<value>Amanita</value>
+	</data>
+	<data name="mushroom_2" xml:space="preserve">
+		<value>Chanterelle</value>
+	</data>
+	<data name="mushroom_3" xml:space="preserve">
+		<value>Death cup</value>
+	</data>
+	<data name="mushroom_4" xml:space="preserve">
+		<value>Honey fungus</value>
+	</data>
+	<data name="mushroom_5" xml:space="preserve">
+		<value>Ink cap</value>
+	</data>
+	<data name="mushroom_6" xml:space="preserve">
+		<value>Milky cup</value>
+	</data>
+	<data name="mushroom_7" xml:space="preserve">
+		<value>Inocybe</value>
+	</data>
+	<data name="mushroom_8" xml:space="preserve">
+		<value>Penny bun</value>
+	</data>
+	<data name="mushroom_9" xml:space="preserve">
+		<value>Gyromitra</value>
+	</data>
 	<data name="RateSec" xml:space="preserve">
 		<value>Rate {0:#0.000} /sec</value>
 	</data>
@@ -259,35 +289,5 @@
 	</data>
 	<data name="YouWin" xml:space="preserve">
 		<value>You Win!</value>
-	</data>
-	<data name="mushroom_1" xml:space="preserve">
-		<value>Fly Agaric</value>
-	</data>
-	<data name="mushroom_2" xml:space="preserve">
-		<value>Chanterelle</value>
-	</data>
-	<data name="mushroom_3" xml:space="preserve">
-		<value>Toadstool</value>
-	</data>
-	<data name="mushroom_4" xml:space="preserve">
-		<value>Armillaria</value>
-	</data>
-	<data name="mushroom_5" xml:space="preserve">
-		<value>Coprinus</value>
-	</data>
-	<data name="mushroom_6" xml:space="preserve">
-		<value>Lactarius</value>
-	</data>
-	<data name="mushroom_7" xml:space="preserve">
-		<value>Erubescens</value>
-	</data>
-	<data name="mushroom_0" xml:space="preserve">
-		<value>Champignon</value>
-	</data>
-	<data name="mushroom_8" xml:space="preserve">
-		<value>Russula</value>
-	</data>
-	<data name="mushroom_9" xml:space="preserve">
-		<value>Gyromitra</value>
 	</data>
 </root>

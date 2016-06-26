@@ -243,31 +243,31 @@
 		<value>Inflamed eyes? eat Fox</value>
 	</data>
 	<data name="mushroom_0" xml:space="preserve">
-		<value>Champignon</value>
+		<value>Button mushroom</value>
 	</data>
 	<data name="mushroom_1" xml:space="preserve">
-		<value>Fly Agaric</value>
+		<value>Amanita</value>
 	</data>
 	<data name="mushroom_2" xml:space="preserve">
 		<value>Chanterelle</value>
 	</data>
 	<data name="mushroom_3" xml:space="preserve">
-		<value>Toadstool</value>
+		<value>Death cup</value>
 	</data>
 	<data name="mushroom_4" xml:space="preserve">
-		<value>Armillaria</value>
+		<value>Honey fungus</value>
 	</data>
 	<data name="mushroom_5" xml:space="preserve">
-		<value>Coprinus</value>
+		<value>Ink cap</value>
 	</data>
 	<data name="mushroom_6" xml:space="preserve">
-		<value>Lactarius</value>
+		<value>Milky cup</value>
 	</data>
 	<data name="mushroom_7" xml:space="preserve">
-		<value>Erubescens</value>
+		<value>Inocybe</value>
 	</data>
 	<data name="mushroom_8" xml:space="preserve">
-		<value>Russula</value>
+		<value>Penny bun</value>
 	</data>
 	<data name="mushroom_9" xml:space="preserve">
 		<value>Gyromitra</value>
