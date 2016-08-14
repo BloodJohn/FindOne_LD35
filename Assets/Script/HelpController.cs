@@ -32,7 +32,7 @@ public class HelpController : MonoBehaviour
         for (var i = 0; i < mushTextList.Length; i++)
         {
             mushTextList[i].text = LanguageManager.Instance.GetTextValue(string.Format("mushroom_{0}", i));
-            Debug.Log(mushTextList[i].text);
+            //Debug.Log(mushTextList[i].text);
         }
 
         gamePanel.SetActive(false);

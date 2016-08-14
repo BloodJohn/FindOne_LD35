@@ -156,7 +156,7 @@
 		<value>Ползи улитка, ползи!</value>
 	</data>
 	<data name="level_2" xml:space="preserve">
-		<value>Шампиньоны для чемпионов</value>
+		<value>Проведи пальцем без отрыва</value>
 	</data>
 	<data name="level_20" xml:space="preserve">
 		<value>Ты еще здесь?</value>
