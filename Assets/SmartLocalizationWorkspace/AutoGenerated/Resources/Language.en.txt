@@ -290,4 +290,7 @@
 	<data name="YouWin" xml:space="preserve">
 		<value>You Win!</value>
 	</data>
+	<data name="RestartButton" xml:space="preserve">
+		<value />
+	</data>
 </root>

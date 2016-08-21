@@ -275,6 +275,9 @@
 	<data name="RateSec" xml:space="preserve">
 		<value>{0:#0.000} гриб/сек</value>
 	</data>
+	<data name="RestartButton" xml:space="preserve">
+		<value>Еще грибов, пожалуйста!</value>
+	</data>
 	<data name="TheSimonSnail" xml:space="preserve">
 		<value>Улитка Семен</value>
 	</data>

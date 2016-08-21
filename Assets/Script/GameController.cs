@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using SmartLocalization;
-using UnityEngine.Advertisements;
 using UnityEngine.Analytics;
 
 public class GameController : MonoBehaviour
