@@ -6,15 +6,20 @@ using UnityEngine.UI;
 /// <summary>Контроллер для панельки с итогами игры</summary>
 public class VictoryController : MonoBehaviour
 {
+    public const string rateAppKey = "rateApp";
+    public const string storeURL = "https://play.google.com/store/apps/details?id=com.StarAge.SimonSnail";
+
     public GameController game;
     public GameObject gamePanel;
     public Text finalRate;
     public Text countDownText;
     public Text winText;
     public Text adsText;
+    public Text rateText;
     public Text restartText;
     public Button startGame;
     public Button startAds;
+    public Button rateApp;
 
     /// <summary>индекс последнего съеденного гриба</summary>
     public int lastClick = 0;
@@ -45,6 +50,7 @@ public class VictoryController : MonoBehaviour
         {
             startGame.gameObject.SetActive(true);
             startAds.gameObject.SetActive(false);
+            rateApp.gameObject.SetActive(false);
             countDownText.gameObject.SetActive(false);
         }
     }
@@ -59,11 +65,24 @@ public class VictoryController : MonoBehaviour
         winText.text = LanguageManager.Instance.GetTextValue("YouWin");
         adsText.text = LanguageManager.Instance.GetTextValue("AdsButton");
         restartText.text = LanguageManager.Instance.GetTextValue("RestartButton");
+        rateText.text = LanguageManager.Instance.GetTextValue("CommentGame");
 
         gamePanel.SetActive(false);
         gameObject.SetActive(true);
         startGame.gameObject.SetActive(false);
-        startAds.gameObject.SetActive(true);
+
+        var firstWin = PlayerPrefs.GetInt(rateAppKey, 0);
+
+        if (firstWin > 0)
+        {
+            startAds.gameObject.SetActive(true);
+            rateApp.gameObject.SetActive(false);
+        }
+        else
+        {
+            startAds.gameObject.SetActive(false);
+            rateApp.gameObject.SetActive(true);
+        }
 
         countDownTimer = delayStart;
         countDownText.gameObject.SetActive(true);
@@ -78,21 +97,40 @@ public class VictoryController : MonoBehaviour
 
     }
 
+    public void RateApp()
+    {
+        rateApp.gameObject.SetActive(false);
+        startAds.gameObject.SetActive(false);
+        countDownTimer = 0f;
+        countDownText.gameObject.SetActive(false);
+
+        Application.OpenURL(storeURL);
+        PlayerPrefs.SetInt(rateAppKey, 1);
+        startGame.gameObject.SetActive(true);
+    }
+
     /// <summary>Вызывается по кнопке startAds</summary>
     public void ShowAd()
     {
+        rateApp.gameObject.SetActive(false);
+        startAds.gameObject.SetActive(false);
+        countDownTimer = 0f;
+        countDownText.gameObject.SetActive(false);
+
+
         if (Advertisement.IsReady())
         {
             startGame.gameObject.SetActive(false);
-            startAds.gameObject.SetActive(false);
-            countDownTimer = 0f;
-            countDownText.gameObject.SetActive(false);
 
             var showOptions = new ShowOptions
             {
                 resultCallback = HandleShowResult
             };
             Advertisement.Show(null, showOptions);
+        }
+        else
+        {
+            startGame.gameObject.SetActive(true);
         }
     }
 

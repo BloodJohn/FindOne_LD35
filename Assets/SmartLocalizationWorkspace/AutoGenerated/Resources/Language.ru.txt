@@ -119,6 +119,9 @@
 	<data name="AdsButton" xml:space="preserve">
 		<value>Рекламная Пауза</value>
 	</data>
+	<data name="CommentGame" xml:space="preserve">
+		<value>Что Вам понравилось?</value>
+	</data>
 	<data name="Delicious" xml:space="preserve">
 		<value>Вкусно!</value>
 	</data>

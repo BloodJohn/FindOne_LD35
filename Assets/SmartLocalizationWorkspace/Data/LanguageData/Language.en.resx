@@ -119,6 +119,9 @@
 	<data name="AdsButton" xml:space="preserve">
 		<value>Play Ads</value>
 	</data>
+	<data name="CommentGame" xml:space="preserve">
+		<value>What you liked in game?</value>
+	</data>
 	<data name="Delicious" xml:space="preserve">
 		<value>Delicious!</value>
 	</data>
@@ -275,6 +278,9 @@
 	<data name="RateSec" xml:space="preserve">
 		<value>Rate {0:#0.000} /sec</value>
 	</data>
+	<data name="RestartButton" xml:space="preserve">
+		<value />
+	</data>
 	<data name="TheSimonSnail" xml:space="preserve">
 		<value>The Simon Snail</value>
 	</data>
@@ -289,8 +295,5 @@
 	</data>
 	<data name="YouWin" xml:space="preserve">
 		<value>You Win!</value>
-	</data>
-	<data name="RestartButton" xml:space="preserve">
-		<value />
 	</data>
 </root>

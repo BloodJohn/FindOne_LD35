@@ -275,6 +275,9 @@
 	<data name="RateSec" xml:space="preserve">
 		<value>Rate {0:#0.000} /sec</value>
 	</data>
+	<data name="RestartButton" xml:space="preserve">
+		<value>More mushrooms please!</value>
+	</data>
 	<data name="TheSimonSnail" xml:space="preserve">
 		<value>The Simon Snail</value>
 	</data>
@@ -290,7 +293,7 @@
 	<data name="YouWin" xml:space="preserve">
 		<value>You Win!</value>
 	</data>
-	<data name="RestartButton" xml:space="preserve">
-		<value>More mushrooms please!</value>
+	<data name="CommentGame" xml:space="preserve">
+		<value>What you liked in game?</value>
 	</data>
 </root>
